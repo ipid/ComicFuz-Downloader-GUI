@@ -10,7 +10,7 @@ from ..util import *
 
 class CfgPackParser:
     @classmethod
-    def parse(cls, config_pack: Dict[str, Any]) -> List[ComicFuzFileItem]:
+    def parse(cls, config_pack: Dict[str, Any], cid: str) -> List[ComicFuzFileItem]:
         contents = config_pack.get('configuration', {}).get('contents')
         if contents is None:
             raise RuntimeError('Key `contents` not found in configuration_packs.json')
@@ -26,7 +26,7 @@ class CfgPackParser:
 
             result.append(ComicFuzFileItem(
                 index=i, file_path=file_path,
-                file_disk_name=file_disk_name_index + '_' + PathUtil.strip_bad_char(file_path),
+                file_disk_name=cid + '_' + file_disk_name_index + '_' + PathUtil.strip_bad_char(file_path),
                 page_no=page_no, dummy_pixels=dummy_pixels,
             ))
 

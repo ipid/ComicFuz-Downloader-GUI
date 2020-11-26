@@ -454,7 +454,7 @@ class MainForm:
     ) -> None:
         try:
             license, config_pack = ComicFuzService.get_license_and_cfg_pack(manga_url_info, http_util)
-            file_items = CfgPackParser.parse(config_pack)
+            file_items = CfgPackParser.parse(config_pack, manga_url_info.cid)
         except:
             traceback.print_exc()
             self.queue.put(DelegatedTask(
